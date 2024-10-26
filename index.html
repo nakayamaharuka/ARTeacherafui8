@@ -27,28 +27,40 @@
             </a-assets>
 
             <a-marker
-                id="animated-marker"
+                id="markerA"
                 type="pattern"
                 preset="custom"
                 url="assets/marker.patt"
                 raycaster="objects: .clickable"
                 emitevents="true"
                 cursor="fuse: false; rayOrigin: mouse;"
-                id="markerA"
             >
                 <a-entity
                     id="bowser-model"
-                    scale="1.0810243358803844 1.0810243358803844 1.0810243358803844"
+                    scale="1.081 1.081 1.081"
                     animation-mixer="loop: repeat"
                     gltf-model="#animated-asset"
                     class="clickable"
                     gesture-handler
                 ></a-entity>
-
-                <a-entity sound="src: #moaning; autoplay: true; loop: true"></a-entity>
             </a-marker>
 
             <a-entity camera></a-entity>
         </a-scene>
+
+        <script>
+            // マーカー検出イベントを監視し、音声再生を開始
+            const marker = document.querySelector("#markerA");
+            const sound = document.querySelector("#moaning");
+
+            marker.addEventListener("markerFound", () => {
+                sound.play();
+                sound.loop = true;
+            });
+
+            marker.addEventListener("markerLost", () => {
+                sound.pause();
+            });
+        </script>
     </body>
 </html>
