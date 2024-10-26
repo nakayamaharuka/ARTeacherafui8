@@ -53,8 +53,22 @@
             const marker = document.querySelector("#markerA");
             const sound = document.querySelector("#moaning");
 
+            // ユーザーが画面をタップした際に音声再生を許可
+            window.addEventListener("click", () => {
+                if (sound.paused) {
+                    sound.play().catch((error) => {
+                        console.log("オートプレイエラー:", error);
+                    });
+                    sound.loop = true;
+                }
+            });
+
             marker.addEventListener("markerFound", () => {
-                sound.play();
+                if (sound.paused) {
+                    sound.play().catch((error) => {
+                        console.log("オートプレイエラー:", error);
+                    });
+                }
                 sound.loop = true;
             });
 
