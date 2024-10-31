@@ -53,8 +53,6 @@
             const marker = document.querySelector("#markerA");
             const sound = document.querySelector("#moaning");
 
-            
-
             marker.addEventListener("markerFound", () => {
                 if (sound.paused) {
                     sound.play().catch((error) => {
